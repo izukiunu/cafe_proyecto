@@ -76,11 +76,11 @@ WSGI_APPLICATION = 'cafeteria_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bdcafeteria',
-        'USER': 'Admin',  
-        'PASSWORD': '12345',  
+        'NAME': 'bdcafeteria',  
+        'USER': 'root',         
+        'PASSWORD': '',        
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '3306',         
     }
 }
 
