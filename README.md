@@ -46,5 +46,6 @@ Para ejecutar este proyecto, necesitarás los siguientes componentes:
 
 1. **Clona este repositorio:**
    ```bash
-   git clone https://github.com/tu-usuario/cafeteria-jjs.git
+   
+   git clone https://github.com/izukiunu/cafe_proyecto.git
    cd cafeteria-jjs
