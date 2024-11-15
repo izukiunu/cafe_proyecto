@@ -19,7 +19,6 @@ class Menu(models.Model):
     m_precio = models.PositiveIntegerField(default=0)
     m_stock = models.PositiveIntegerField(default=0)
     cantidad_piezas = models.PositiveIntegerField(default=0)
-    m_salsa = models.CharField(max_length=30)
 
     def __str__(self):
         return f"{self.m_nombre}, {self.m_precio}, {self.cantidad_piezas}"

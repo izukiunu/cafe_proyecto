@@ -1,5 +1,5 @@
 from django import forms
-from App.models import Usuario,Cliente,Orden,Menu,Venta
+from cafeteriaApp import Usuario,Cliente,Orden,Menu,Venta
 
 class FromLogin(forms.Form):
     nombre=forms.CharField()
