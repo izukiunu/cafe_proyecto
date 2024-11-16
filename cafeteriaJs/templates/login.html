@@ -3,64 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio Sesión</title>
+    <title>Inicio de Sesión - Cafetería JS</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         body {
-            background-color: #f5f5f5;
+            background-color: #000;
+            background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.1) 75%), 
+                              linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.1) 75%);
+            background-size: 50px 50px;
+            color: #4b3b2b;
             font-family: Arial, sans-serif;
         }
-        .header-bg {
-            background-color: #3e2723; /* Café oscuro */
-            color: #ffffff;
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        .header {
+            background-color: #4b3b2b;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
         }
         .btn-custom {
-            background-color: #6d4c41; /* Color café medio */
-            color: #ffffff;
+            background-color: #6f4e37;
+            color: #fff;
             border: none;
         }
         .btn-custom:hover {
-            background-color: #4e342e; /* Café oscuro para hover */
-        }
-        .container-bg {
-            background-color: #ffffff;
-            border: 1px solid #d7ccc8; /* Café claro */
+            background-color: #5c3f2b;
         }
         .logo {
-            max-width: 150px;
-        }
-        h2, h1 {
-            color: #3e2723; /* Café oscuro */
+            display: block;
+            margin: 0 auto 1rem auto;
         }
     </style>
 </head>
 <body>
     {% load static %}
-    <header class="header-bg py-3">
-        <div class="container d-flex align-items-center">
-            <img class="logo me-3" src="{% static 'logo' %}" alt="logo">
-            <h2>Sistema de Venta Cafetería Js</h2>
-        </div>
+    <header class="header">
+        <img src="{% static 'logo.png' %}" alt="Logo" width="150" class="logo">
+        <h2>Sistema de Venta - Cafetería JS</h2>
     </header>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6 container-bg rounded p-4 shadow-sm">
-                <h1 class="text-center mb-4">{{ Usuario }}</h1>
-                <form method="POST" action="{% url 'login' %}">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre de Usuario:</label>
-                        {{ form.nombre }}
-                    </div>
-                    <div class="mb-3">
-                        <label for="{{ form.password_usuario.id_for_label }}" class="form-label">Contraseña:</label>
-                        <input type="password" name="{{ form.password_usuario.name }}" id="{{ form.password_usuario.id_for_label }}" class="form-control" />
-                    </div>
-                    <button type="submit" class="btn btn-custom w-100 mt-3">Iniciar sesión</button>
-                </form>
-            </div>
+    
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="login-container col-md-4">
+            <h3 class="text-center mb-4">{{ Usuario }}</h3>
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre de Usuario:</label>
+                    {{ form.nombre }}
+                </div>
+                
+                <div class="mb-3">
+                    <label for="{{ form.password_usuario.id_for_label }}" class="form-label">Contraseña:</label>
+                    <input type="password" name="{{ form.password_usuario.name }}" id="{{ form.password_usuario.id_for_label }}" class="form-control" />
+                </div>
+                
+                <button type="submit" class="btn btn-custom w-100">Iniciar sesión</button>
+            </form>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
