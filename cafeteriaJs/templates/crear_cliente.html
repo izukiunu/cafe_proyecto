@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cliente</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        /* Fondo de pantalla */
+        body {
+            background-image: url("{% static 'foto25.png' %}");
+            background-size: cover;
+            background-attachment: fixed;
+            color: #4b3b2b;
+        }
+        
+        /* Encabezado */
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        header h2 {
+            color: #fff;
+        }
+
+        /* Tarjeta principal */
+        .card-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Botones de navegación */
+        .nav-pills .nav-link {
+            background-color: #6f4e37;
+            color: #fff;
+            border-radius: 5px;
+        }
+        .nav-pills .nav-link:hover {
+            background-color: #5c3f2b;
+        }
+        
+        /* Botón de formulario */
+        .btn-custom {
+            background-color: #6f4e37;
+            color: #fff;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #5c3f2b;
+        }
+
+        /* Ajuste de enlaces */
+        .form-links .btn {
+            background-color: #6f4e37;
+            color: #fff;
+        }
+        .form-links .btn:hover {
+            background-color: #5c3f2b;
+        }
+
+        /* Estilo de la descripción */
+        p {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    {% load static %}
+    <header>
+        <div class="row">
+            <div class="col bg-dark p-4 text-white d-flex align-items-center">
+                <img class="logo mx-2" src="{% static 'logo.png' %}" width="150px" alt="logo.png">
+                <h2 class="offset-2">Menú Cajero - Crear Cliente</h2>
+            </div>
+        </div>
+    </header>
+
+    <main class="d-flex justify-content-center align-items-center vh-100">
+        <div class="col-md-8 card-container">
+            <div class="alert alert-dark text-center mb-4">
+                <ul class="nav nav-pills justify-content-center text-center">
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="/crear_orden">Crear Orden</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="/crear_cliente">Crear Cliente</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="/crear_menu">Crear Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="/crear_venta">Crear Venta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="/">Gestionar Orden</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <h3>Formulario - Crear Cliente</h3>
+            <p>En esta sección podrás agregar un cliente, visualizarlo y modificar si lo necesitas. Por favor, toma atención a las instrucciones de cada dato solicitado.</p>
+            <hr>
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                
+                <div class="text-center">
+                    <button type="submit" class="btn btn-custom my-3">Crear Cliente</button>
+                </div>
+                
+                <div class="form-links text-center">
+                    <a class="btn btn-custom mx-2" href="/ver_cliente">Ver cliente</a>
+                    <a class="btn btn-custom mx-2" href="/Modificar_cliente">Modificar cliente</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
