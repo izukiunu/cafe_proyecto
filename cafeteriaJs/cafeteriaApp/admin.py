@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import Usuario, Cliente, Menu, Venta, Orden
+from django.contrib import admin
+from .models import SpinnerItem
 
 # Register your models here.
 class UsuarioAdmin(admin.ModelAdmin):
@@ -16,6 +18,10 @@ class OrdenAdmin(admin.ModelAdmin):
 
 class VentaAdmin(admin.ModelAdmin):
     list_display = ['id', 'fecha', 'hora', 'fk_orden', 'total_original', 'total_final', 'total_descuento', 'fk_cliente']
+
+@admin.register(SpinnerItem)
+class SpinnerItemAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'link')
 
 admin.site.register(Usuario, UsuarioAdmin)
 admin.site.register(Cliente, ClienteAdmin)

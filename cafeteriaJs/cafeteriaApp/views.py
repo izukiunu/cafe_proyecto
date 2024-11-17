@@ -215,3 +215,12 @@ def modificar_cliente(request, cliente_id):
 
 def otro_template(request):
     return render(request, 'otro_template.html')
+
+
+#spiner
+from django.shortcuts import render
+from .models import SpinnerItem
+
+def index(request):
+    spinner_items = SpinnerItem.objects.all()
+    return render(request, 'index.html', {'spinner_items': spinner_items})
