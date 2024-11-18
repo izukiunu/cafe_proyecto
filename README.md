@@ -38,7 +38,7 @@ Para ejecutar este proyecto, necesitarás los siguientes componentes:
 1. **Descarga e instala XAMPP** desde [https://www.apachefriends.org](https://www.apachefriends.org).
 2. Asegúrate de que los servicios de **Apache** y **MySQL** estén corriendo.
 3. Abre **phpMyAdmin** desde [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
-4. Crea una base de datos llamada `cafeteria_db`.
+4. Crea una base de datos llamada `bdcafeteria`.
 
 ---
 
