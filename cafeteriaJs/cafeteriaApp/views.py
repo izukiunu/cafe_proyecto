@@ -224,3 +224,72 @@ from .models import SpinnerItem
 def index(request):
     spinner_items = SpinnerItem.objects.all()
     return render(request, 'index.html', {'spinner_items': spinner_items})
+
+
+from .models import Categoria, Producto
+
+from django.http import JsonResponse
+from django.shortcuts import render
+from .models import Categoria, Producto
+
+def productos(request):
+    categorias = Categoria.objects.all()  # Recupera todas las categorías
+    return render(request, 'productos.html', {'categorias': categorias})
+
+def obtener_productos(request, categoria_id):
+    productos = Producto.objects.filter(categoria_id=categoria_id, stock__gt=0)
+    productos_data = [
+        {
+            'id': producto.id,
+            'titulo': producto.titulo,
+            'descripcion': producto.descripcion,
+            'precio': producto.precio,
+            'imagen': producto.imagen.url,
+            'stock': producto.stock if not producto.stock_ilimitado else "Ilimitado",
+        }
+        for producto in productos
+    ]
+    return JsonResponse({'productos': productos_data})
+
+
+from django.http import JsonResponse
+
+def agregar_al_carro(request, producto_id):
+    producto = Producto.objects.get(id=producto_id)
+
+    # Validación de stock
+    if not producto.stock_ilimitado and producto.stock == 0:
+        return JsonResponse({'error': 'Este producto no tiene stock disponible'}, status=400)
+
+    # Lógica para añadir al carrito...
+    # Reducir stock si es necesario, guardar en la sesión, etc.
+
+    return JsonResponse({'success': 'Producto añadido al carrito'})
+
+
+from django.http import JsonResponse
+from .models import Categoria, Producto
+
+def productos_por_categoria(request, categoria_id):
+    try:
+        categoria = Categoria.objects.get(id=categoria_id)
+        productos = categoria.productos.all()  # Cambiar producto_set a productos
+        data = {
+            'productos': [
+                {
+                    'id': producto.id,
+                    'titulo': producto.titulo,
+                    'descripcion': producto.descripcion,
+                    'precio': producto.precio,
+                    'imagen': producto.imagen.url if producto.imagen else '',
+                    'stock': producto.stock,
+                    'stock_ilimitado': producto.stock_ilimitado,
+                } for producto in productos
+            ]
+        }
+        return JsonResponse(data)
+    except Categoria.DoesNotExist:
+        return JsonResponse({'error': 'Categoría no encontrada'}, status=404)
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+        return JsonResponse({'error': 'Error inesperado en el servidor'}, status=500)

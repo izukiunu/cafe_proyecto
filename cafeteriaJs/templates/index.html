@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cafetería JJS</title>
   <link href="{% static 'css/index.css' %}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
   <!-- Encabezado -->
@@ -15,7 +16,7 @@
       <a class="navbar-brand" href="#">
         <img src="/media/logopaginaswetjorney.png" alt="Logo Cafetería JJS" class="logo">
       </a>
-      <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+      <button class="nav-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
       <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="#quienes-somos">Quiénes somos</a></li>
@@ -41,8 +42,8 @@
       </div>
       {% endfor %}
     </div>
-    <button class="spinner-button prev">&lt;</button>
-    <button class="spinner-button next">&gt;</button>
+    <button class="spinner-button prev"><i class="fas fa-chevron-left"></i></button>
+    <button class="spinner-button next"><i class="fas fa-chevron-right"></i></button>
   </section>
 
   <!-- Quiénes Somos -->
@@ -90,7 +91,9 @@
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2024 Cafetería JJS. Todos los derechos reservados.</p>
+    <div class="footer-container">
+      <p>&copy; 2024 Cafetería JJS. Todos los derechos reservados.</p>
+    </div>
   </footer>
 
   <script src="{% static 'js/index.js' %}"></script>

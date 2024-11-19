@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     prevButton.addEventListener('click', showPrevImage);
     nextButton.addEventListener('click', showNextImage);
 
-    // Cambio automático cada 5 segundos
+    // Cambio automático cada 10 segundos
     setInterval(() => {
         console.log("Ejecutando cambio automático");
         showNextImage();
