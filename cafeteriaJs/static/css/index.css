@@ -18,6 +18,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
+    height: 80px; /* Fija la altura del navbar */
 }
 
 .navbar a.navbar-brand {
@@ -37,6 +38,20 @@ body {
     cursor: pointer;
 }
 
+.navbar .logo-container {
+    height: 100%; /* La altura del contenedor se adapta al navbar */
+    display: flex;
+    align-items: center; /* Centra verticalmente el logo dentro del navbar */
+}
+
+.navbar .logo {
+    max-height: 150px; /* El logo ocupará un máximo del 70% de la altura del navbar */
+    width: 150px; /* Mantiene las proporciones del logo */
+    object-fit: contain; /* Asegura que el logo no se deforme */
+
+}
+
+/* Navbar Nav */
 .navbar-nav {
     display: flex;
     gap: 15px;
