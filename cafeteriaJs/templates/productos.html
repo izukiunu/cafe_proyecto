@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Cafetería</title>
+    <link href="{% static 'css/productos.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Productos</h1>
+    </header>
+    <main>
+        <!-- Categorías -->
+        <div id="categorias">
+            <h2>Categorías</h2>
+            <div class="categorias-lista">
+                {% for categoria in categorias %}
+                <div class="categoria-item">
+                    <button class="categoria-boton" data-categoria-id="{{ categoria.id }}">
+                        <img src="{{ categoria.imagen.url }}" alt="{{ categoria.nombre }}">
+                        <h3>{{ categoria.nombre }}</h3>
+                        <p>{{ categoria.descripcion }}</p>
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Contenedor para mostrar productos dinámicamente -->
+        <div id="productos-contenedor">
+            <p>Seleccione una categoría para ver los productos.</p>
+        </div>
+    </main>
+
+    <!-- Referencia al JavaScript -->
+    <script src="{% static 'js/productos.js' %}"></script>
+</body>
+</html>

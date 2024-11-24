@@ -22,7 +22,11 @@ urlpatterns = [
     path('modificar_cliente/<int:cliente_id>/', views.modificar_cliente, name='modificar_cliente'),
     path('modificar_orden/<int:orden_id>/', views.modificar_orden, name='modificar_orden'),
     path('otro_template/<int:orden_id>/', views.otro_template, name='otro_template'),
+    path('productos/', views.productos, name='productos'),
+    path('productos/<int:categoria_id>/', views.productos_por_categoria, name='productos_por_categoria'),
+
 ]
+
 
 # Agregar rutas para archivos de medios en desarrollo
 if settings.DEBUG:

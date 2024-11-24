@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Usuario, Cliente, Menu, Venta, Orden
 from django.contrib import admin
 from .models import SpinnerItem
+from .models import Categoria, Producto
 
 # Register your models here.
 class UsuarioAdmin(admin.ModelAdmin):
@@ -28,3 +29,26 @@ admin.site.register(Cliente, ClienteAdmin)
 admin.site.register(Menu, MenuAdmin)
 admin.site.register(Orden, OrdenAdmin)
 admin.site.register(Venta, VentaAdmin)
+
+from .models import Categoria, Producto
+
+@admin.register(Categoria)
+class CategoriaAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'descripcion')
+    search_fields = ('nombre',)
+
+
+@admin.register(Producto)
+class ProductoAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'categoria', 'precio', 'get_stock_display')
+    search_fields = ('titulo', 'categoria__nombre')
+    list_filter = ('categoria', 'stock_ilimitado')
+    fieldsets = (
+        (None, {
+            'fields': ('titulo', 'categoria', 'descripcion', 'precio', 'imagen')
+        }),
+        ('Opciones de Stock', {
+            'fields': ('stock', 'stock_ilimitado'),
+            'description': 'Si seleccionas "Stock ilimitado", no es necesario definir un stock numérico.'
+        }),
+    )
