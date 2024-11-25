@@ -9,11 +9,22 @@
 </head>
 <body>
     <header>
-        <h1>Productos</h1>
+        <nav class="navbar">
+            <a class="navbar-brand" href="#">
+                <img src="/media/logopaginaswetjorney.png" alt="Logo Cafetería JJS" class="logo">
+            </a>
+            <button class="nav-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#quienes-somos">Quiénes somos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#productos">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#login">Login</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
         <!-- Categorías -->
-        <div id="categorias">
+        <aside id="categorias">
             <h2>Categorías</h2>
             <div class="categorias-lista">
                 {% for categoria in categorias %}
@@ -21,17 +32,18 @@
                     <button class="categoria-boton" data-categoria-id="{{ categoria.id }}">
                         <img src="{{ categoria.imagen.url }}" alt="{{ categoria.nombre }}">
                         <h3>{{ categoria.nombre }}</h3>
-                        <p>{{ categoria.descripcion }}</p>
                     </button>
                 </div>
                 {% endfor %}
             </div>
-        </div>
+        </aside>
 
-        <!-- Contenedor para mostrar productos dinámicamente -->
-        <div id="productos-contenedor">
-            <p>Seleccione una categoría para ver los productos.</p>
-        </div>
+        <!-- Contenedor para mostrar productos -->
+        <section id="productos-contenedor">
+            <div id="productos">
+                <p>Seleccione una categoría para ver los productos.</p>
+            </div>
+        </section>
     </main>
 
     <!-- Referencia al JavaScript -->
