@@ -255,3 +255,53 @@ main {
         min-height: auto; /* Permite que los recuadros se ajusten */
     }
 }
+
+
+/* Botones para ajustar cantidad */
+.cantidad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.cantidad-btn {
+    background: #3b2e2e;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cantidad-btn:hover {
+    background-color: #a67c52;
+}
+
+.cantidad input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0 10px;
+    padding: 5px;
+}
+
+/* Botón de añadir al carro */
+.add-to-cart {
+    background-color: #3b2e2e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.add-to-cart:hover {
+    background-color: #a67c52;
+}
