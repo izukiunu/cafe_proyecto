@@ -49,16 +49,41 @@
                     <p>{{ producto.descripcion }}</p>
                     <p>Precio: ${{ producto.precio }}</p>
                     <div class="cantidad">
-                        <button class="cantidad-btn" onclick="modificarCantidad(-1, {{ producto.id }})">-</button>
+                        <button class="cantidad-btn" onclick="modificarCantidad({{ producto.id }}, -1)">-</button>
                         <input type="number" id="cantidad_{{ producto.id }}" value="1" min="1">
-                        <button class="cantidad-btn" onclick="modificarCantidad(1, {{ producto.id }})">+</button>
+                        <button class="cantidad-btn" onclick="modificarCantidad({{ producto.id }}, 1)">+</button>
                     </div>
-                    <button class="add-to-cart">Añadir al carro</button>
+                    <button class="add-to-cart" onclick="agregarAlCarro({{ producto.id }}, '{{ producto.titulo }}', {{ producto.precio }})">Añadir al carro</button>
                 </div>
                 {% endfor %}
             </div>
         </section>
     </main>
+
+    <!-- Botón del carrito de compras -->
+    <button id="carrito-boton" onclick="toggleCarrito()">
+        🛒
+    </button>
+
+    <!-- Ventana modal para el carrito -->
+    <div id="carrito-modal" class="modal hidden" onclick="cerrarCarrito(event)">
+        <div class="carrito-contenido" onclick="event.stopPropagation()">
+            <!-- Barra de título con botón de cierre -->
+            <div class="carrito-header">
+                <h2>Carrito de Compras</h2>
+                <button class="cerrar-carrito" onclick="toggleCarrito()">✖</button>
+            </div>
+            
+            <!-- Contenedor de productos del carrito -->
+            <div id="carrito-productos"></div>
+            
+            <!-- Total y resumen -->
+            <div class="carrito-total">
+                <p>Total a pagar: <span id="total-pagar">$0.00</span></p>
+                <button class="checkout-btn">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Referencia al JavaScript -->
     <script src="{% static 'js/productos.js' %}"></script>
