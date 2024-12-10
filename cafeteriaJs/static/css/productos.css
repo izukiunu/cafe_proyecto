@@ -41,9 +41,9 @@ h1.text-center {
 
 /* Imagen del producto */
 .product-image {
-    max-height: 150px;
+    max-height: 200px;
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 
