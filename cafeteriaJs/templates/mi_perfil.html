@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{% static 'css/perfil.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="container py-5">
+  <div class="row">
+    <!-- Columna izquierda: Categorías del perfil -->
+    <div class="col-md-3">
+      <h4 class="mb-4">Mi Perfil</h4>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <a href="#" class="text-decoration-none" onclick="showSection('modificarPerfil')">Modificar Perfil</a>
+        </li>
+        <li class="list-group-item">
+          <a href="#" class="text-decoration-none" onclick="showSection('configuraciones')">Configuraciones</a>
+        </li>
+        <li class="list-group-item">
+          <a href="#" class="text-decoration-none" onclick="showSection('historialPedidos')">Historial de Pedidos</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Columna derecha: Contenido -->
+    <div class="col-md-9">
+
+      <!-- Modificar Perfil -->
+      <div id="modificarPerfil" class="section">
+        <h3>Modificar Perfil</h3>
+        <form method="post" action="{% url 'modificar_perfil' %}">
+          {% csrf_token %}
+          
+          <!-- Nombre de Usuario -->
+          <div class="mb-3">
+            <label for="nombreUsuario" class="form-label">Nombre de Usuario:</label>
+            <input type="text" class="form-control" id="nombreUsuario" name="nombre" value="{{ cliente.usuario.username }}" required>
+          </div>
+          
+          <!-- Correo -->
+          <div class="mb-3">
+            <label for="correoUsuario" class="form-label">Correo Electrónico:</label>
+            <input type="email" class="form-control" id="correoUsuario" name="correo" value="{{ cliente.usuario.email }}" required>
+          </div>
+      
+          <!-- Teléfono -->
+          <div class="mb-3">
+            <label for="telefonoUsuario" class="form-label">Teléfono:</label>
+            <input type="text" class="form-control" id="telefonoUsuario" name="telefono" value="{{ cliente.telefono }}">
+          </div>
+          
+          <!-- Dirección -->
+          <div class="mb-3">
+            <label for="direccionUsuario" class="form-label">Dirección:</label>
+            <input type="text" class="form-control" id="direccionUsuario" name="direccion" value="{{ cliente.direccion }}">
+          </div>
+      
+          <!-- Contraseña Actual -->
+          <div class="mb-3">
+            <label for="contraseñaActual" class="form-label">Contraseña Actual:</label>
+            <input type="password" class="form-control" id="contraseñaActual" name="contraseña_actual" required>
+          </div>
+      
+          <!-- Nueva Contraseña -->
+          <div class="mb-3">
+            <label for="nuevaContraseña" class="form-label">Nueva Contraseña:</label>
+            <input type="password" class="form-control" id="nuevaContraseña" name="nueva_contraseña">
+          </div>
+      
+          <!-- Confirmar Nueva Contraseña -->
+          <div class="mb-3">
+            <label for="confirmarContraseña" class="form-label">Confirmar Nueva Contraseña:</label>
+            <input type="password" class="form-control" id="confirmarContraseña" name="confirmar_contraseña">
+          </div>
+      
+          <!-- Botón Guardar con Confirmación -->
+          <button type="button" class="btn btn-primary" onclick="confirmarCambios()">Guardar Cambios</button>
+          
+          <!-- Mensajes de confirmación -->
+          {% if messages %}
+          <div class="alert alert-success mt-3" role="alert">
+            {% for message in messages %}
+              {{ message }}
+            {% endfor %}
+          </div>
+          {% endif %}
+        </form>
+      </div>
+
+      <!-- Configuraciones -->
+      <div id="configuraciones" class="section d-none">
+        <h3>Configuraciones</h3>
+        <form method="post" action="{% url 'guardar_configuraciones' %}">
+          {% csrf_token %}
+          <h4 class="mt-4">Notificaciones</h4>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="notificacionesCorreo" name="notificaciones_correo" {% if cliente.notificaciones_correo %}checked{% endif %}>
+            <label class="form-check-label" for="notificacionesCorreo">
+              Activar notificaciones por correo electrónico
+            </label>
+          </div>
+          <div class="mb-3">
+            <label for="alertas" class="form-label">Personalizar alertas:</label>
+            <select class="form-select" id="alertas" name="alertas">
+              <option value="todos" {% if cliente.alertas == 'todos' %}selected{% endif %}>Pedidos y Promociones</option>
+              <option value="pedidos" {% if cliente.alertas == 'pedidos' %}selected{% endif %}>Solo pedidos</option>
+              <option value="promociones" {% if cliente.alertas == 'promociones' %}selected{% endif %}>Solo promociones</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+      </div>
+
+      <!-- Historial de Pedidos -->
+      <div id="historialPedidos" class="section d-none">
+        <h4>Historial de Pedidos</h4>
+        {% if historial_pedidos %}
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for pedido in historial_pedidos %}
+                <tr>
+                  <td>{{ pedido.fecha }}</td>
+                  <td>{{ pedido.producto.nombre }}</td>
+                  <td>{{ pedido.cantidad }}</td>
+                  <td>${{ pedido.total }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p class="text-muted">No tienes pedidos en tu historial.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function showSection(sectionId) {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.classList.add('d-none')); // Oculta todas las secciones
+    document.getElementById(sectionId).classList.remove('d-none'); // Muestra la seleccionada
+  }
+
+  function confirmarCambios() {
+    if (confirm("¿Estás seguro de que deseas guardar estos cambios?")) {
+      document.querySelector('#modificarPerfil form').submit();
+    }
+  }
+</script>
+</body>
+</html>

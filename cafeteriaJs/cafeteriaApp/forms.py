@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuario, Cliente, Orden, Menu, Venta
+from .models import Cliente
 
 class FromLogin(forms.Form):
     nombre = forms.CharField()
@@ -13,46 +13,29 @@ class FormCrearCliente(forms.Form):
     calle_numero = forms.IntegerField()
     telefono = forms.IntegerField()
 
-class FormCrearMenu(forms.Form):
-    m_nombre = forms.CharField()
-    m_detalle = forms.CharField()
-    m_precio = forms.IntegerField()
-    m_stock = forms.IntegerField()
-    cantidad_piezas = forms.IntegerField()
-    m_salsa = forms.CharField()
 
-class FormCrearOrden(forms.ModelForm):
-    cod_orden = forms.IntegerField()
+
+
+from django import forms
+from django.contrib.auth.models import User
+from .models import Cliente
+
+class RegistroClienteForm(forms.ModelForm):
+    username = forms.CharField(max_length=100, required=True)
+    email = forms.EmailField(required=True)
+    password = forms.CharField(widget=forms.PasswordInput, required=True)
 
     class Meta:
-        model = Orden
-        fields = ['cod_orden', 'fk_cliente', 'fk_menu', 'estado_orden']
+        model = Cliente
+        fields = ('telefono',)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        try:
-            ultimo_cod_orden = Orden.objects.latest('cod_orden').cod_orden
-        except Orden.DoesNotExist:
-            ultimo_cod_orden = 0
-
-        self.fields['cod_orden'].initial = ultimo_cod_orden + 1
-
-class FormCrearVenta(forms.ModelForm):
-    class Meta:
-        model = Venta
-        fields = ['fk_cliente', 'fk_orden', 'total_descuento']
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Obtener el último cod_orden creado para mostrarlo en el formulario
-        try:
-            ultimo_cod_orden = Orden.objects.latest('cod_orden').cod_orden
-            self.fields['fk_orden'].queryset = Orden.objects.filter(cod_orden=ultimo_cod_orden)
-            self.fields['fk_orden'].widget.attrs['readonly'] = True
-        except Orden.DoesNotExist:
-            self.fields['fk_orden'].queryset = Orden.objects.none()
-
-class FormModificarUsuario(forms.ModelForm):
-    class Meta:
-        model = Usuario
-        fields = ['nombre', 'password_usuario', 'tipo_usuario']
+    def save(self, commit=True):
+        user = User.objects.create_user(
+            username=self.cleaned_data['username'],
+            email=self.cleaned_data['email'],
+            password=self.cleaned_data['password']
+        )
+        cliente = Cliente(usuario=user, telefono=self.cleaned_data['telefono'])
+        if commit:
+            cliente.save()
+        return cliente

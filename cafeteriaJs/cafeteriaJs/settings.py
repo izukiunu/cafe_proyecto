@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cafeteriaApp',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 ROOT_URLCONF = 'cafeteriaJs.urls'
@@ -135,9 +137,47 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files (uploaded by users)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+# Configuración de autenticación
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # Permite autenticación de usuarios de Django
+)
+
+INTERNAL_IPS = ['127.0.0.1']
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,  # Mantén logs esenciales del sistema
+    'handlers': {
+        'console': {  # Muestra mensajes importantes en la consola
+            'class': 'logging.StreamHandler',
+        },
+        'file': {  # Almacena todos los logs en un archivo
+            'level': 'ERROR',  # Cambiado a ERROR para registrar solo errores importantes
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+        },
+    },
+    'loggers': {
+        'django': {  # Configuración para logs generales de Django
+            'handlers': ['console', 'file'],
+            'level': 'WARNING',  # Cambiado a WARNING para ignorar mensajes DEBUG
+            'propagate': True,
+        },
+        'cafeteriaApp': {  # Logs específicos de tu app
+            'handlers': ['console', 'file'],
+            'level': 'INFO',  # Cambiado a INFO para registrar solo mensajes esenciales
+            'propagate': False,
+        },
+    },
+}

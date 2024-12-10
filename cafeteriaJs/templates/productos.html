@@ -6,86 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos - Cafetería</title>
     <link href="{% static 'css/productos.css' %}" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token }}"> <!-- Metaetiqueta para CSRF -->
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{% url 'index' %}">
                 <img src="/media/logopaginaswetjorney.png" alt="Logo Cafetería JJS" class="logo">
             </a>
             <button class="nav-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#quienes-somos">Quiénes somos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#productos">Productos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#login">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}#quienes-somos">Quiénes somos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'productos' %}">Productos</a></li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'mi_perfil' %}">Hola, {{ request.user.username }}</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'iniciar_sesion' %}">Login</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
-    <main>
-        <!-- Categorías -->
-        <aside id="categorias">
-            <h2>Categorías</h2>
-            <div class="categorias-lista">
-                {% for categoria in categorias %}
-                <div class="categoria-item">
-                    <button class="categoria-boton" data-categoria-id="{{ categoria.id }}">
-                        <img src="{{ categoria.imagen.url }}" alt="{{ categoria.nombre }}">
-                        <h3>{{ categoria.nombre }}</h3>
-                    </button>
-                </div>
-                {% endfor %}
-            </div>
-        </aside>
 
-        <!-- Contenedor para mostrar productos -->
-        <section id="productos-contenedor">
-            <div id="productos">
-                <p>Seleccione una categoría para ver los productos.</p>
-                {% for producto in productos %}
-                <div class="producto">
-                    <img src="{{ producto.imagen.url }}" alt="{{ producto.titulo }}">
-                    <h3>{{ producto.titulo }}</h3>
-                    <p>{{ producto.descripcion }}</p>
-                    <p>Precio: ${{ producto.precio }}</p>
-                    <div class="cantidad">
-                        <button class="cantidad-btn" onclick="modificarCantidad({{ producto.id }}, -1)">-</button>
-                        <input type="number" id="cantidad_{{ producto.id }}" value="1" min="1">
-                        <button class="cantidad-btn" onclick="modificarCantidad({{ producto.id }}, 1)">+</button>
-                    </div>
-                    <button class="add-to-cart" onclick="agregarAlCarro({{ producto.id }}, '{{ producto.titulo }}', {{ producto.precio }})">Añadir al carro</button>
-                </div>
-                {% endfor %}
-            </div>
-        </section>
+    <main>
     </main>
 
-    <!-- Botón del carrito de compras -->
-    <button id="carrito-boton" onclick="toggleCarrito()">
-        🛒
-    </button>
-
-    <!-- Ventana modal para el carrito -->
-    <div id="carrito-modal" class="modal hidden" onclick="cerrarCarrito(event)">
-        <div class="carrito-contenido" onclick="event.stopPropagation()">
-            <!-- Barra de título con botón de cierre -->
-            <div class="carrito-header">
-                <h2>Carrito de Compras</h2>
-                <button class="cerrar-carrito" onclick="toggleCarrito()">✖</button>
-            </div>
-            
-            <!-- Contenedor de productos del carrito -->
-            <div id="carrito-productos"></div>
-            
-            <!-- Total y resumen -->
-            <div class="carrito-total">
-                <p>Total a pagar: <span id="total-pagar">$0.00</span></p>
-                <button class="checkout-btn">Finalizar Compra</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Referencia al JavaScript -->
     <script src="{% static 'js/productos.js' %}"></script>
 </body>
 </html>
