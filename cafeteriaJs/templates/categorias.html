@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorías - Cafetería JJS</title>
+    <link href="{% static 'css/header.css' %}" rel="stylesheet">
+    <link href="{% static 'css/categorias.css' %}" rel="stylesheet">
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <main>
+        <section id="categorias" class="py-5">
+            <div class="container">
+                <h1 class="text-center">Explora nuestras Categorías</h1>
+                <div class="category-grid">
+                    {% for categoria in categorias %}
+                    <div class="category-card">
+                        <a href="{% url 'listar_productos' categoria.id %}" class="category-link">
+                            <img src="{{ categoria.imagen.url }}" alt="{{ categoria.nombre }}" class="category-image">
+                            <h3 class="category-title">{{ categoria.nombre }}</h3>
+                            <p class="category-description">{{ categoria.descripcion }}</p>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="{% static 'js/header.js' %}"></script>
+</body>
+</html>

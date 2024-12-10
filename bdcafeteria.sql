@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2024 a las 06:41:41
+-- Tiempo de generación: 10-12-2024 a las 21:56:06
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -117,7 +117,19 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (53, 'Can add categoria', 14, 'add_categoria'),
 (54, 'Can change categoria', 14, 'change_categoria'),
 (55, 'Can delete categoria', 14, 'delete_categoria'),
-(56, 'Can view categoria', 14, 'view_categoria');
+(56, 'Can view categoria', 14, 'view_categoria'),
+(57, 'Can add carrito', 15, 'add_carrito'),
+(58, 'Can change carrito', 15, 'change_carrito'),
+(59, 'Can delete carrito', 15, 'delete_carrito'),
+(60, 'Can view carrito', 15, 'view_carrito'),
+(61, 'Can add pedido', 16, 'add_pedido'),
+(62, 'Can change pedido', 16, 'change_pedido'),
+(63, 'Can delete pedido', 16, 'delete_pedido'),
+(64, 'Can view pedido', 16, 'view_pedido'),
+(65, 'Can add spinner image', 17, 'add_spinnerimage'),
+(66, 'Can change spinner image', 17, 'change_spinnerimage'),
+(67, 'Can delete spinner image', 17, 'delete_spinnerimage'),
+(68, 'Can view spinner image', 17, 'view_spinnerimage');
 
 -- --------------------------------------------------------
 
@@ -144,10 +156,12 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$720000$IZKdcOFHMLXrw5jX3NRpPO$kDce0Qi13QlpT1XnD6FRneym2UmC8q3xDH9fe7oFaC4=', '2024-11-16 21:39:51.293036', 1, 'izu', '', '', 'sebastianaguirremundaca@gmail.com', 1, 1, '2024-10-24 02:16:55.609888'),
-(2, 'pbkdf2_sha256$720000$f6zC74nLDNRxo8BZrJRn0v$0W71/MeDlKjRn9l012qUysju38Mu/IyozKU4ewPHLl8=', NULL, 0, 'Administrador', '', '', '', 0, 1, '2024-10-24 02:21:16.189092'),
+(1, 'pbkdf2_sha256$720000$jeJg9qe6jFfvS166HfO0HC$UP7EJQ1fegbQ5yU0MjbnTHoTRg+nURRT3rappO1tb4c=', '2024-12-10 20:46:54.174557', 1, 'izu', '', '', 'sebastianaguirremundaca@gmail.com', 1, 1, '2024-10-24 02:16:55.609888'),
+(2, 'pbkdf2_sha256$720000$f6zC74nLDNRxo8BZrJRn0v$0W71/MeDlKjRn9l012qUysju38Mu/IyozKU4ewPHLl8=', '2024-12-08 21:03:22.851904', 0, 'Administrador', '', '', '', 0, 1, '2024-10-24 02:21:16.189092'),
 (3, 'pbkdf2_sha256$720000$4bWz07ILlzGJDXox8COF9n$nw/mizOzY0xgeJ/ufCX7YMVUu4qHdNpaiqF+lvmRzKs=', NULL, 0, 'cajero', '', '', '', 0, 1, '2024-10-24 02:25:38.755472'),
-(4, 'pbkdf2_sha256$720000$P8MwPKKWqV87ZmdJFZZqkL$MKqXqcr5j/LoPgbf9AXygCxOGPWbYv1Hz2jHl4SHwv0=', NULL, 0, 'Empleado', '', '', '', 0, 1, '2024-10-24 02:26:51.021477');
+(4, 'pbkdf2_sha256$720000$P8MwPKKWqV87ZmdJFZZqkL$MKqXqcr5j/LoPgbf9AXygCxOGPWbYv1Hz2jHl4SHwv0=', NULL, 0, 'Empleado', '', '', '', 0, 1, '2024-10-24 02:26:51.021477'),
+(5, 'pbkdf2_sha256$720000$9FtPvX9ENmdphmmI9lD9VL$FGZ0uoODURJBfTJpLnGX9ktNLzjG+oo1zrLz2ScfPvA=', NULL, 0, 'default_user', '', '', 'default@example.com', 0, 1, '2024-12-08 04:35:24.633372'),
+(13, 'pbkdf2_sha256$720000$fG4O0V3NLjJbC0nDvPni6M$3bxTbvYYqQnOCF1XsQsq790KtIbX2Px9UCQIhf81mfE=', '2024-12-10 20:50:47.926660', 0, 'cliente', '', '', 'sebastianaguirremundaca@gmail.com', 0, 1, '2024-12-10 20:50:34.919073');
 
 -- --------------------------------------------------------
 
@@ -176,13 +190,35 @@ CREATE TABLE `auth_user_user_permissions` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `cafeteriaapp_carrito`
+--
+
+CREATE TABLE `cafeteriaapp_carrito` (
+  `id` bigint(20) NOT NULL,
+  `cantidad` int(10) UNSIGNED NOT NULL CHECK (`cantidad` >= 0),
+  `producto_id` bigint(20) NOT NULL,
+  `usuario_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cafeteriaapp_carrito`
+--
+
+INSERT INTO `cafeteriaapp_carrito` (`id`, `cantidad`, `producto_id`, `usuario_id`) VALUES
+(15, 6, 1, 1),
+(16, 5, 2, 1),
+(17, 9, 3, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `cafeteriaapp_categoria`
 --
 
 CREATE TABLE `cafeteriaapp_categoria` (
   `id` bigint(20) NOT NULL,
-  `nombre` varchar(200) NOT NULL,
-  `descripcion` longtext DEFAULT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `descripcion` longtext NOT NULL,
   `imagen` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -204,42 +240,59 @@ INSERT INTO `cafeteriaapp_categoria` (`id`, `nombre`, `descripcion`, `imagen`) V
 
 CREATE TABLE `cafeteriaapp_cliente` (
   `id` bigint(20) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  `apellido` varchar(30) NOT NULL,
-  `correo` varchar(60) NOT NULL,
-  `calle_direccion` varchar(90) NOT NULL,
-  `calle_numero` varchar(10) NOT NULL,
-  `telefono` varchar(12) NOT NULL
+  `telefono` varchar(15) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `direccion` longtext DEFAULT NULL,
+  `rut` varchar(12) DEFAULT NULL,
+  `estado_compra` varchar(50) NOT NULL,
+  `estado_pedido` varchar(50) NOT NULL,
+  `total_pagar` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cafeteriaapp_cliente`
+--
+
+INSERT INTO `cafeteriaapp_cliente` (`id`, `telefono`, `usuario_id`, `direccion`, `rut`, `estado_compra`, `estado_pedido`, `total_pagar`) VALUES
+(1, '+56932454866', 1, 'calle abadia 9565', 'Sin RUT', 'pendiente', 'procesando', 0.00),
+(2, '+5693245466', 2, 'calle abadia 9565', '21302986-k', 'pendiente', 'procesando', 0.00),
+(3, '', 3, '', '', 'pendiente', 'procesando', 0.00),
+(4, '', 4, '', '', 'pendiente', 'procesando', 0.00),
+(5, '', 5, '', '', 'pendiente', 'procesando', 0.00),
+(6, '+569345525', 13, NULL, NULL, 'pendiente', 'procesando', 0.00);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cafeteriaapp_menu`
+-- Estructura de tabla para la tabla `cafeteriaapp_pedido`
 --
 
-CREATE TABLE `cafeteriaapp_menu` (
+CREATE TABLE `cafeteriaapp_pedido` (
   `id` bigint(20) NOT NULL,
-  `m_nombre` varchar(30) NOT NULL,
-  `m_detalle` varchar(255) NOT NULL,
-  `m_precio` int(10) UNSIGNED NOT NULL CHECK (`m_precio` >= 0),
-  `m_stock` int(10) UNSIGNED NOT NULL CHECK (`m_stock` >= 0),
-  `cantidad_piezas` int(10) UNSIGNED NOT NULL CHECK (`cantidad_piezas` >= 0)
+  `productos` longtext NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `direccion` varchar(255) NOT NULL,
+  `rut` varchar(12) NOT NULL,
+  `telefono` varchar(15) NOT NULL,
+  `codigo_pedido` varchar(8) NOT NULL,
+  `confirmado_pago` tinyint(1) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `estado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `cafeteriaapp_orden`
+-- Volcado de datos para la tabla `cafeteriaapp_pedido`
 --
 
-CREATE TABLE `cafeteriaapp_orden` (
-  `id` bigint(20) NOT NULL,
-  `cod_orden` int(11) NOT NULL,
-  `estado_orden` varchar(10) NOT NULL,
-  `fk_cliente_id` bigint(20) NOT NULL,
-  `fk_menu_id` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `cafeteriaapp_pedido` (`id`, `productos`, `total`, `direccion`, `rut`, `telefono`, `codigo_pedido`, `confirmado_pago`, `usuario_id`, `estado`) VALUES
+(1, '[{\"titulo\": \"capuchino\", \"cantidad\": 3, \"precio_unitario\": 5000.0, \"subtotal\": 15000.0}]', 15000.00, 'calle abadia 9565', 'Sin RUT', '+56932454866', 'RZJZMX3E', 0, 1, 'proceso'),
+(5, '[{\"titulo\": \"latte\", \"cantidad\": 3, \"precio_unitario\": 6000.0, \"subtotal\": 18000.0}, {\"titulo\": \"capuchino\", \"cantidad\": 4, \"precio_unitario\": 5000.0, \"subtotal\": 20000.0}, {\"titulo\": \"cafe expreso\", \"cantidad\": 3, \"precio_unitario\": 2500.0, \"subtotal\": 7500.0}]', 45500.00, 'calle abadia 9565', 'Sin RUT', '+56932454866', 'QTSPUN7G', 0, 1, 'proceso'),
+(6, '[{\"titulo\": \"capuchino\", \"cantidad\": 4, \"precio_unitario\": 5000.0, \"subtotal\": 20000.0}]', 20000.00, 'calle abadia 9565', 'Sin RUT', '+56932454866', 'RRXJ7CMN', 0, 1, 'proceso'),
+(7, '[{\"titulo\": \"capuchino\", \"cantidad\": 4, \"precio_unitario\": 5000.0, \"subtotal\": 20000.0}]', 20000.00, 'calle abadia 9565', 'Sin RUT', '+56932454866', 'AZJYJOFG', 0, 1, 'proceso'),
+(8, '[{\"titulo\": \"cafe expreso\", \"cantidad\": 6, \"precio_unitario\": 2500.0, \"subtotal\": 15000.0}]', 15000.00, 'calle abadia 9565', 'Sin RUT', '+56932454866', 'CN2GTWTD', 0, 1, 'proceso'),
+(12, '[{\"titulo\": \"cafe expreso\", \"cantidad\": 5, \"precio_unitario\": 2500.0, \"subtotal\": 12500.0}]', 12500.00, 'calle abadia 9565', 'Sin RUT', '+56932454866', 'TSF8GR0L', 0, 1, 'proceso'),
+(13, '[{\"titulo\": \"cafe expreso\", \"cantidad\": 9, \"precio_unitario\": 2500.0, \"subtotal\": 22500.0}, {\"titulo\": \"capuchino\", \"cantidad\": 4, \"precio_unitario\": 5000.0, \"subtotal\": 20000.0}]', 42500.00, 'calle abadia 9565', 'Sin RUT', '+56932454866', 'P9GOZAJW', 0, 1, 'proceso'),
+(14, '[{\"titulo\": \"cafe expreso\", \"cantidad\": 5, \"precio_unitario\": 2500.0, \"subtotal\": 12500.0}]', 12500.00, 'calle abadia 9565', 'Sin RUT', '+56932454866', 'AUB59AXO', 0, 1, 'proceso');
 
 -- --------------------------------------------------------
 
@@ -249,76 +302,46 @@ CREATE TABLE `cafeteriaapp_orden` (
 
 CREATE TABLE `cafeteriaapp_producto` (
   `id` bigint(20) NOT NULL,
-  `titulo` varchar(200) NOT NULL,
+  `titulo` varchar(100) NOT NULL,
   `descripcion` longtext NOT NULL,
   `precio` decimal(10,2) NOT NULL,
-  `imagen` varchar(100) NOT NULL,
-  `stock` int(10) UNSIGNED DEFAULT NULL,
-  `categoria_id` bigint(20) NOT NULL,
-  `stock_ilimitado` tinyint(1) NOT NULL
+  `imagen` varchar(100) DEFAULT NULL,
+  `stock` int(10) UNSIGNED NOT NULL,
+  `categoria_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `cafeteriaapp_producto`
 --
 
-INSERT INTO `cafeteriaapp_producto` (`id`, `titulo`, `descripcion`, `precio`, `imagen`, `stock`, `categoria_id`, `stock_ilimitado`) VALUES
-(1, 'cafe expreso', 'un cafe de calidad y renombre', 2500.00, 'productos/espresso-vs-expresso_r9JFP3s.jpg', 0, 1, 1),
-(2, 'capuchino', 'Un Capuchino es el equilibrio perfecto entre espresso, leche vaporizada y espuma', 5000.00, 'productos/01911ee7-3c8a-7b37-8d61-02a742ecbdd8.png', 0, 1, 1),
-(3, 'mocachino', 'bebida caliente que combina café, leche y chocolate', 5500.00, 'productos/como_hacer_mocachino_frio_32349_orig.jpg', 0, 1, 1),
-(4, 'latte', 'bebida de café con leche, espresso, leche al vapor y una capa de espuma', 6000.00, 'productos/46349.jpg.jpg', 0, 1, 1);
+INSERT INTO `cafeteriaapp_producto` (`id`, `titulo`, `descripcion`, `precio`, `imagen`, `stock`, `categoria_id`) VALUES
+(1, 'cafe expreso', 'un cafe de calidad y renombre', 2500.00, 'productos/espresso-vs-expresso_r9JFP3s.jpg', 9999, 1),
+(2, 'capuchino', 'Un Capuchino es el equilibrio perfecto entre espresso, leche vaporizada y espuma', 5000.00, 'productos/01911ee7-3c8a-7b37-8d61-02a742ecbdd8.png', 9999, 1),
+(3, 'mocachino', 'bebida caliente que combina café, leche y chocolate', 5500.00, 'productos/como_hacer_mocachino_frio_32349_orig.jpg', 9999, 1),
+(4, 'latte', 'bebida de café con leche, espresso, leche al vapor y una capa de espuma', 6000.00, 'productos/46349.jpg_S40eeBq.jpg', 9999, 1),
+(5, 'cafe de prueba', 'prueba prueba', 12000.00, 'productos/Captura_de_pantalla_2024-12-07_030326.png', 21, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cafeteriaapp_spinneritem`
+-- Estructura de tabla para la tabla `cafeteriaapp_spinnerimage`
 --
 
-CREATE TABLE `cafeteriaapp_spinneritem` (
+CREATE TABLE `cafeteriaapp_spinnerimage` (
   `id` bigint(20) NOT NULL,
-  `image` varchar(100) NOT NULL,
   `title` varchar(100) NOT NULL,
   `description` longtext NOT NULL,
-  `link` varchar(200) DEFAULT NULL
+  `image` varchar(100) NOT NULL,
+  `width` int(10) UNSIGNED NOT NULL CHECK (`width` >= 0),
+  `height` int(10) UNSIGNED NOT NULL CHECK (`height` >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `cafeteriaapp_spinneritem`
+-- Volcado de datos para la tabla `cafeteriaapp_spinnerimage`
 --
 
-INSERT INTO `cafeteriaapp_spinneritem` (`id`, `image`, `title`, `description`, `link`) VALUES
-(1, 'spinner_images/cafeengrano.jpg', 'Cafe de especialidad', 'en nuestra cafeteria tenemos todo tipo de cafe para cada tipo de persona venga a disfrutar de nuestros sabores', NULL),
-(2, 'spinner_images/sandwich.jpg', 'Sandwich de especialidad', 'Disfruta de nuestra gran variedad de sandwiches preparados de la casas con una gran variedad de productos de calidad y de primera mano todo esto en solo cafeteria JJS', NULL);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `cafeteriaapp_usuario`
---
-
-CREATE TABLE `cafeteriaapp_usuario` (
-  `id` bigint(20) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `password_usuario` varchar(8) NOT NULL,
-  `tipo_usuario` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `cafeteriaapp_venta`
---
-
-CREATE TABLE `cafeteriaapp_venta` (
-  `id` bigint(20) NOT NULL,
-  `fecha` date NOT NULL,
-  `hora` time(6) NOT NULL,
-  `total_original` int(10) UNSIGNED NOT NULL CHECK (`total_original` >= 0),
-  `total_descuento` int(10) UNSIGNED NOT NULL CHECK (`total_descuento` >= 0),
-  `total_final` int(11) NOT NULL,
-  `fk_cliente_id` bigint(20) NOT NULL,
-  `fk_orden_id` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `cafeteriaapp_spinnerimage` (`id`, `title`, `description`, `image`, `width`, `height`) VALUES
+(1, 'cafeteria', 'ven a disfrutar nuestros cafes de especialidad', 'spinner_images/UC8A1834.jpg', 300, 300);
 
 -- --------------------------------------------------------
 
@@ -354,7 +377,28 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 (10, '2024-11-25 16:58:55.565680', '4', 'Helados', 1, '[{\"added\": {}}]', 14, 1),
 (11, '2024-11-25 19:02:51.747880', '2', 'capuchino', 1, '[{\"added\": {}}]', 13, 1),
 (12, '2024-11-25 19:09:02.251851', '3', 'mocachino', 1, '[{\"added\": {}}]', 13, 1),
-(13, '2024-11-25 19:11:17.022480', '4', 'latte', 1, '[{\"added\": {}}]', 13, 1);
+(13, '2024-11-25 19:11:17.022480', '4', 'latte', 1, '[{\"added\": {}}]', 13, 1),
+(14, '2024-12-08 05:09:40.972408', '4', 'latte', 2, '[]', 13, 1),
+(15, '2024-12-08 15:12:50.331441', '5', 'cafe de prueba', 1, '[{\"added\": {}}]', 13, 1),
+(16, '2024-12-08 16:08:17.689602', '4', 'latte', 2, '[{\"changed\": {\"fields\": [\"Stock ilimitado\"]}}]', 13, 1),
+(17, '2024-12-08 16:08:53.406563', '4', 'latte', 2, '[{\"changed\": {\"fields\": [\"Stock ilimitado\"]}}]', 13, 1),
+(18, '2024-12-10 07:29:24.702086', '4', 'latte', 2, '[{\"changed\": {\"fields\": [\"Imagen\"]}}]', 13, 1),
+(19, '2024-12-10 14:10:55.104110', '4', 'Pedido GEDBKWFW - izu', 3, '', 16, 1),
+(20, '2024-12-10 14:10:59.546207', '3', 'Pedido 3PMYHBKH - izu', 3, '', 16, 1),
+(21, '2024-12-10 14:11:03.947202', '2', 'Pedido FSQWF0LL - izu', 3, '', 16, 1),
+(22, '2024-12-10 14:46:23.705849', '9', 'Pedido UF7LDZXH - izu', 3, '', 16, 1),
+(23, '2024-12-10 14:46:27.840176', '10', 'Pedido JTDFBEZ8 - izu', 3, '', 16, 1),
+(24, '2024-12-10 14:46:31.086004', '11', 'Pedido IQXFVQID - izu', 3, '', 16, 1),
+(25, '2024-12-10 17:16:49.926047', '2', 'Sandwich de especialidad', 3, '', 11, 1),
+(26, '2024-12-10 17:16:53.560704', '1', 'Cafe de especialidad', 3, '', 11, 1),
+(27, '2024-12-10 17:17:34.380344', '3', 'cafeteria', 1, '[{\"added\": {}}]', 11, 1),
+(28, '2024-12-10 17:35:58.258789', '1', 'cafeteria', 1, '[{\"added\": {}}]', 17, 1),
+(29, '2024-12-10 20:24:05.671716', '6', 'cliente', 3, '', 4, 1),
+(30, '2024-12-10 20:26:38.098940', '8', 'cliente', 3, '', 4, 1),
+(31, '2024-12-10 20:40:15.324924', '9', 'cliente', 3, '', 4, 1),
+(32, '2024-12-10 20:47:01.243915', '10', 'cliente', 3, '', 4, 1),
+(33, '2024-12-10 20:49:38.421155', '11', 'cliente', 3, '', 4, 1),
+(34, '2024-12-10 20:50:09.179545', '12', 'cliente', 3, '', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -377,11 +421,14 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (3, 'auth', 'group'),
 (2, 'auth', 'permission'),
 (4, 'auth', 'user'),
+(15, 'cafeteriaApp', 'carrito'),
 (14, 'cafeteriaApp', 'categoria'),
 (7, 'cafeteriaApp', 'cliente'),
 (8, 'cafeteriaApp', 'menu'),
 (9, 'cafeteriaApp', 'orden'),
+(16, 'cafeteriaApp', 'pedido'),
 (13, 'cafeteriaApp', 'producto'),
+(17, 'cafeteriaApp', 'spinnerimage'),
 (11, 'cafeteriaApp', 'spinneritem'),
 (12, 'cafeteriaApp', 'usuario'),
 (10, 'cafeteriaApp', 'venta'),
@@ -426,7 +473,20 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (18, 'sessions', '0001_initial', '2024-10-24 02:11:50.325859'),
 (19, 'cafeteriaApp', '0001_initial', '2024-11-16 23:00:45.483169'),
 (20, 'cafeteriaApp', '0002_categoria_producto', '2024-11-19 22:10:32.149197'),
-(21, 'cafeteriaApp', '0003_producto_stock_ilimitado_alter_producto_stock', '2024-11-19 22:37:55.484009');
+(21, 'cafeteriaApp', '0003_producto_stock_ilimitado_alter_producto_stock', '2024-11-19 22:37:55.484009'),
+(22, 'cafeteriaApp', '0004_remove_cliente_apellido_and_more', '2024-12-08 04:38:12.600048'),
+(23, 'cafeteriaApp', '0005_cliente_direccion_cliente_rut_alter_producto_imagen', '2024-12-08 18:23:21.767954'),
+(24, 'cafeteriaApp', '0006_cliente_alertas_cliente_motivo_eliminacion_and_more', '2024-12-08 19:16:21.723739'),
+(25, 'cafeteriaApp', '0007_remove_orden_fk_menu_remove_venta_fk_cliente_and_more', '2024-12-08 20:11:38.221370'),
+(26, 'cafeteriaApp', '0008_carrito_delete_usuario_remove_cliente_alertas_and_more', '2024-12-09 17:01:22.481279'),
+(27, 'cafeteriaApp', '0009_remove_carrito_cliente_remove_carrito_subtotal_and_more', '2024-12-10 06:34:57.227932'),
+(28, 'cafeteriaApp', '0010_cliente_estado_compra_cliente_estado_pedido_and_more', '2024-12-10 07:24:23.510008'),
+(29, 'cafeteriaApp', '0011_pedido', '2024-12-10 13:59:30.641097'),
+(30, 'cafeteriaApp', '0012_spinnerimage_delete_spinneritem', '2024-12-10 17:33:59.446162'),
+(31, 'cafeteriaApp', '0013_pedido_estado', '2024-12-10 18:45:50.328439'),
+(32, 'cafeteriaApp', '0014_alter_cliente_usuario', '2024-12-10 20:22:23.123855'),
+(33, 'cafeteriaApp', '0015_alter_cliente_direccion', '2024-12-10 20:46:22.146804'),
+(34, 'cafeteriaApp', '0016_alter_cliente_rut', '2024-12-10 20:50:18.355912');
 
 -- --------------------------------------------------------
 
@@ -446,7 +506,11 @@ CREATE TABLE `django_session` (
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('ctpr1zgnofty9pm76b2xwmj01iv5w6f8', '.eJxVjEEOwiAQRe_C2hCgDNNx6d4zEKaAVA0kpV0Z765NutDtf-_9l_BhW4vfelr8HMVZaHH63ThMj1R3EO-h3pqcWl2XmeWuyIN2eW0xPS-H-3dQQi_fGhAGJLYjaVbIhAaYonEMiQebzRAZQCUaIZJDBGaHWlmjXDAuZyveH7iONso:1tCQWF:Bqf1AzEWDCkOCJwOhDSzIRX0KSHFsheFm46ocKJi82g', '2024-11-30 21:39:51.324702'),
-('nwr622bbx8c5eyjvj1xnww5a7v08wtxw', '.eJxVjEEOwiAQRe_C2hAGRKpL9z0DmRkGqRpISrsy3l2bdKHb_977LxVxXUpcu8xxSuqiQB1-N0J-SN1AumO9Nc2tLvNEelP0TrseW5LndXf_Dgr28q2tA2_ZBhnY2SySHYHPmZP355yAHZPxxhiGk4AZxBpiJITgQjgKonp_APAgOGk:1t3nPr:RnDHMytR9siBaFbE5l93edV3z6y5fGv5I-KwO-E7t3Y', '2024-11-07 02:17:35.007668');
+('gpbiqrxdn89p0beju6f79eu4ncrhhxc4', '.eJxVjDEOwjAMAP-SGUVyk2KHkZ03RLaTkgJKpaadEH9HkTrAene6t4m8byXuLa9xTuZiwJnTLxTWZ67dpAfX-2J1qds6i-2JPWyztyXl1_Vo_waFW-nfQb0TQeWgxJA9Js1MwkQJnCcPgXVMQuQ8CI4Aeg6IwyTk1E1oPl8cXjg7:1tL7Bv:WNalHu563FKm1lVdSmiFH946rXfrsvJDhJ1CBYbDHGk', '2024-12-24 20:50:47.954993'),
+('kkp64bvqa6a25b9uzyqaio4udbmg6ccz', 'e30:1tKMOV:eGtNqEMWLvzBEkr6MQfFFCxsim_Zod2tj7GBokn9OeI', '2024-12-22 18:52:39.212068'),
+('nwr622bbx8c5eyjvj1xnww5a7v08wtxw', '.eJxVjEEOwiAQRe_C2hAGRKpL9z0DmRkGqRpISrsy3l2bdKHb_977LxVxXUpcu8xxSuqiQB1-N0J-SN1AumO9Nc2tLvNEelP0TrseW5LndXf_Dgr28q2tA2_ZBhnY2SySHYHPmZP355yAHZPxxhiGk4AZxBpiJITgQjgKonp_APAgOGk:1t3nPr:RnDHMytR9siBaFbE5l93edV3z6y5fGv5I-KwO-E7t3Y', '2024-11-07 02:17:35.007668'),
+('qih0yelm3bg1lw3dh9sk7n6n8dfchwud', 'e30:1tKMOc:lw_bAJeJ8XIlRFKIsrbUBcHJLuTLHNPuY68bKByzYKU', '2024-12-22 18:52:46.242473'),
+('saldrycftn2sbqhsfro8bzluow0mnrwx', 'e30:1tKMPL:Co6iuOCjgVBQzxuZpasv_wdAS1UMBkCf_PIXAR9KARw', '2024-12-22 18:53:31.846480');
 
 --
 -- Índices para tablas volcadas
@@ -498,6 +562,14 @@ ALTER TABLE `auth_user_user_permissions`
   ADD KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`);
 
 --
+-- Indices de la tabla `cafeteriaapp_carrito`
+--
+ALTER TABLE `cafeteriaapp_carrito`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cafeteriaApp_carrito_producto_id_6fac0ace_fk_cafeteria` (`producto_id`),
+  ADD KEY `cafeteriaApp_carrito_usuario_id_0c31786c_fk_auth_user_id` (`usuario_id`);
+
+--
 -- Indices de la tabla `cafeteriaapp_categoria`
 --
 ALTER TABLE `cafeteriaapp_categoria`
@@ -508,21 +580,16 @@ ALTER TABLE `cafeteriaapp_categoria`
 -- Indices de la tabla `cafeteriaapp_cliente`
 --
 ALTER TABLE `cafeteriaapp_cliente`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `cafeteriaapp_menu`
---
-ALTER TABLE `cafeteriaapp_menu`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `cafeteriaapp_orden`
---
-ALTER TABLE `cafeteriaapp_orden`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `cafeteriaApp_orden_fk_cliente_id_c8862dd3_fk_cafeteria` (`fk_cliente_id`),
-  ADD KEY `cafeteriaApp_orden_fk_menu_id_155e6937_fk_cafeteriaApp_menu_id` (`fk_menu_id`);
+  ADD UNIQUE KEY `usuario_id` (`usuario_id`);
+
+--
+-- Indices de la tabla `cafeteriaapp_pedido`
+--
+ALTER TABLE `cafeteriaapp_pedido`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `codigo_pedido` (`codigo_pedido`),
+  ADD KEY `cafeteriaApp_pedido_usuario_id_bc16b179_fk_auth_user_id` (`usuario_id`);
 
 --
 -- Indices de la tabla `cafeteriaapp_producto`
@@ -532,24 +599,10 @@ ALTER TABLE `cafeteriaapp_producto`
   ADD KEY `cafeteriaApp_product_categoria_id_2488dbc5_fk_cafeteria` (`categoria_id`);
 
 --
--- Indices de la tabla `cafeteriaapp_spinneritem`
+-- Indices de la tabla `cafeteriaapp_spinnerimage`
 --
-ALTER TABLE `cafeteriaapp_spinneritem`
+ALTER TABLE `cafeteriaapp_spinnerimage`
   ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `cafeteriaapp_usuario`
---
-ALTER TABLE `cafeteriaapp_usuario`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `cafeteriaapp_venta`
---
-ALTER TABLE `cafeteriaapp_venta`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `cafeteriaApp_venta_fk_cliente_id_ae9f89cc_fk_cafeteria` (`fk_cliente_id`),
-  ADD KEY `cafeteriaApp_venta_fk_orden_id_334bc1c6_fk_cafeteriaApp_orden_id` (`fk_orden_id`);
 
 --
 -- Indices de la tabla `django_admin_log`
@@ -599,13 +652,13 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT de la tabla `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_user_groups`
@@ -620,6 +673,12 @@ ALTER TABLE `auth_user_user_permissions`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `cafeteriaapp_carrito`
+--
+ALTER TABLE `cafeteriaapp_carrito`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT de la tabla `cafeteriaapp_categoria`
 --
 ALTER TABLE `cafeteriaapp_categoria`
@@ -629,61 +688,43 @@ ALTER TABLE `cafeteriaapp_categoria`
 -- AUTO_INCREMENT de la tabla `cafeteriaapp_cliente`
 --
 ALTER TABLE `cafeteriaapp_cliente`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `cafeteriaapp_menu`
+-- AUTO_INCREMENT de la tabla `cafeteriaapp_pedido`
 --
-ALTER TABLE `cafeteriaapp_menu`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `cafeteriaapp_orden`
---
-ALTER TABLE `cafeteriaapp_orden`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `cafeteriaapp_pedido`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `cafeteriaapp_producto`
 --
 ALTER TABLE `cafeteriaapp_producto`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `cafeteriaapp_spinneritem`
+-- AUTO_INCREMENT de la tabla `cafeteriaapp_spinnerimage`
 --
-ALTER TABLE `cafeteriaapp_spinneritem`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `cafeteriaapp_usuario`
---
-ALTER TABLE `cafeteriaapp_usuario`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `cafeteriaapp_venta`
---
-ALTER TABLE `cafeteriaapp_venta`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `cafeteriaapp_spinnerimage`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Restricciones para tablas volcadas
@@ -717,24 +758,29 @@ ALTER TABLE `auth_user_user_permissions`
   ADD CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
--- Filtros para la tabla `cafeteriaapp_orden`
+-- Filtros para la tabla `cafeteriaapp_carrito`
 --
-ALTER TABLE `cafeteriaapp_orden`
-  ADD CONSTRAINT `cafeteriaApp_orden_fk_cliente_id_c8862dd3_fk_cafeteria` FOREIGN KEY (`fk_cliente_id`) REFERENCES `cafeteriaapp_cliente` (`id`),
-  ADD CONSTRAINT `cafeteriaApp_orden_fk_menu_id_155e6937_fk_cafeteriaApp_menu_id` FOREIGN KEY (`fk_menu_id`) REFERENCES `cafeteriaapp_menu` (`id`);
+ALTER TABLE `cafeteriaapp_carrito`
+  ADD CONSTRAINT `cafeteriaApp_carrito_producto_id_6fac0ace_fk_cafeteria` FOREIGN KEY (`producto_id`) REFERENCES `cafeteriaapp_producto` (`id`),
+  ADD CONSTRAINT `cafeteriaApp_carrito_usuario_id_0c31786c_fk_auth_user_id` FOREIGN KEY (`usuario_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Filtros para la tabla `cafeteriaapp_cliente`
+--
+ALTER TABLE `cafeteriaapp_cliente`
+  ADD CONSTRAINT `cafeteriaApp_cliente_usuario_id_0ff9d405_fk_auth_user_id` FOREIGN KEY (`usuario_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Filtros para la tabla `cafeteriaapp_pedido`
+--
+ALTER TABLE `cafeteriaapp_pedido`
+  ADD CONSTRAINT `cafeteriaApp_pedido_usuario_id_bc16b179_fk_auth_user_id` FOREIGN KEY (`usuario_id`) REFERENCES `auth_user` (`id`);
 
 --
 -- Filtros para la tabla `cafeteriaapp_producto`
 --
 ALTER TABLE `cafeteriaapp_producto`
   ADD CONSTRAINT `cafeteriaApp_product_categoria_id_2488dbc5_fk_cafeteria` FOREIGN KEY (`categoria_id`) REFERENCES `cafeteriaapp_categoria` (`id`);
-
---
--- Filtros para la tabla `cafeteriaapp_venta`
---
-ALTER TABLE `cafeteriaapp_venta`
-  ADD CONSTRAINT `cafeteriaApp_venta_fk_cliente_id_ae9f89cc_fk_cafeteria` FOREIGN KEY (`fk_cliente_id`) REFERENCES `cafeteriaapp_cliente` (`id`),
-  ADD CONSTRAINT `cafeteriaApp_venta_fk_orden_id_334bc1c6_fk_cafeteriaApp_orden_id` FOREIGN KEY (`fk_orden_id`) REFERENCES `cafeteriaapp_orden` (`id`);
 
 --
 -- Filtros para la tabla `django_admin_log`

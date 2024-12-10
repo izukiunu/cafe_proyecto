@@ -1,0 +1,115 @@
+/* Estilo general */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #3b2e2e;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+    justify-content: space-between; /* Espaciado entre elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 80px;
+}
+
+/* Marca o Logo del Navbar */
+.navbar a.navbar-brand {
+    color: #f3f3f3;
+    font-size: 1.8em;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Botón de alternar menú (para dispositivos pequeños) */
+.navbar .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #f3f3f3;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* Logo */
+.navbar .logo {
+    max-height: 175px;
+    width: 175px;
+    object-fit: contain;
+}
+
+/* Navbar Nav */
+.navbar-nav {
+    display: flex;
+    gap: 15px;
+    align-items: center; /* Alinea verticalmente todos los botones */
+}
+
+/* Enlaces del Navbar */
+.navbar-nav .nav-item .nav-link {
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido del botón */
+    justify-content: center; /* Centra horizontalmente el contenido del botón */
+    color: #f3f3f3;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none; /* Elimina el subrayado */
+    font-size: 1em;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    background-color: #a67c52;
+    color: #fff;
+}
+
+/* Estilo del botón del carrito */
+.navbar-nav a.carrito-link {
+    color: #fff; /* Color del texto */
+    background-color: #3b2e2e; /* Fondo igual que el navbar */
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none; /* Elimina el subrayado */
+    font-size: 1em;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center; /* Centra verticalmente el ícono o texto */
+    justify-content: center; /* Centra horizontalmente el ícono o texto */
+    height: 100%; /* Asegura que ocupe toda la altura del navbar */
+}
+
+.navbar-nav a.carrito-link:hover {
+    background-color: #a67c52;
+    color: #fff;
+}
+
+/* Responsive Menu */
+@media (max-width: 768px) {
+    .navbar-nav {
+        display: none;
+        flex-direction: column;
+        background-color: #3b2e2e;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        padding: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar-nav.active {
+        display: flex;
+    }
+
+    .navbar .nav-toggle {
+        display: block;
+    }
+}

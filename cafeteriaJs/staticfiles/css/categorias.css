@@ -1,0 +1,63 @@
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Títulos */
+h1.text-center {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    color: #3b2e2e;
+}
+
+/* Grid de categorías */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Tarjetas de categorías */
+.category-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.category-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen de la categoría */
+.category-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Contenido de la categoría */
+.category-link {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    text-align: center;
+    padding: 15px;
+}
+
+.category-title {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #3b2e2e;
+}
+
+.category-description {
+    font-size: 1em;
+    color: #666;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - Cafetería JJS</title>
+    <link href="{% static 'css/header.css' %}" rel="stylesheet">
+    <link href="{% static 'css/carrito.css' %}" rel="stylesheet">
+    {% load static %} 
+</head>
+<body>
+    {% include 'header.html' %}
+    <main>
+        <section id="carrito" class="py-5">
+            <div class="container">
+                <h1>Carrito de Compras</h1>
+                <form method="post" action="{% url 'eliminar_del_carrito' %}">
+                    {% csrf_token %}
+                    <div class="cart-grid">
+                        {% for item in carrito_items %}
+                        <div class="cart-item">
+                            <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.titulo }}" class="cart-item-image">
+                            <div class="cart-item-details">
+                                <h3 class="cart-item-title">{{ item.producto.titulo }}</h3>
+                                <p class="cart-item-price">Precio: ${{ item.producto.precio }}</p>
+                                <p class="cart-item-quantity">Cantidad: {{ item.cantidad }}</p>
+                                <p class="cart-item-subtotal">Subtotal: ${{ item.subtotal }}</p>
+                            </div>
+                            <button type="submit" name="producto_id" value="{{ item.producto.id }}" class="btn btn-danger">Eliminar</button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </form>
+                <div class="cart-total">
+                    <h2>Total: ${{ total }}</h2>
+                    <form method="post" action="{% url 'finalizar_compra' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary">Finalizar Compra</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

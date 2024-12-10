@@ -69,7 +69,17 @@
                             <input type="text" name="telefono" class="form-control" id="registerPhone" placeholder="Teléfono">
                             <label for="registerPhone">Teléfono</label>
                         </div>
+                        <div class="form-floating mb-3">
+                            <textarea name="direccion" class="form-control" id="registerAddress" placeholder="Dirección" style="height: 100px;"></textarea>
+                            <label for="registerAddress">Dirección</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="rut" class="form-control" id="registerRUT" placeholder="RUT">
+                            <label for="registerRUT">RUT</label>
+                        </div>
 
+                        {% csrf_token %}
+                        {{ form.as_p }}
                         <button class="w-100 btn btn-lg btn-success" type="submit">Registrarse</button>
                     </form>
                 </div>

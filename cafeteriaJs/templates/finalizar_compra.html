@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen de Compra</title>
+    <link href="{% static 'css/header.css' %}" rel="stylesheet">
+    <link href="{% static 'css/finalizar_compra.css' %}" rel="stylesheet">
+</head>
+<body>
+    {% include 'header.html' %}
+    <main>
+        <!-- Mostrar mensajes de advertencia -->
+        {% if messages %}
+        <div class="alert">
+            <span class="alert-icon">⚠️</span>
+            <div class="alert-message">
+                Actualmente solo aceptamos transferencias bancarias. Por favor, completa este paso para procesar tu pedido.
+            </div>
+        </div>
+            </div>
+        {% endif %}
+        <section class="py-5">
+            <div class="container">
+                <h1>Detalles de tu Compra</h1>
+                <p><strong>Total:</strong> ${{ total }}</p>
+                <p><strong>Código de Pedido:</strong> {{ codigo_pedido }}</p>
+                <h2>Transferir a:</h2>
+                <p><strong>RUT:</strong> {{ rut }}</p>
+                <p><strong>Tipo de Cuenta:</strong> {{ cuenta_tipo }}</p>
+                <p><strong>Correo:</strong> {{ correo }}</p>
+                <p>Por favor, envía el comprobante al correo indicado.</p>
+            </div>
+        </section>
+    </main>
+</body>
+<script>
+    function handleAlertClick() {
+        const alertBox = document.querySelector('.alert');
+        alertBox.style.display = 'none';
+    }
+</script>
+</html>

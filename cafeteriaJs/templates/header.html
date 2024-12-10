@@ -1,0 +1,48 @@
+<header>
+    <nav class="navbar">
+        <!-- Meta para URL del carrito -->
+        <meta name="carrito-url" content="{% url 'ver_carrito' %}">
+        
+        <!-- Enlace al inicio -->
+        <a class="navbar-brand" href="{% url 'listar_categorias' %}">
+            <img src="/media/logopaginaswetjorney.png" alt="Logo Cafetería JJS" class="logo">
+        </a>
+        <button class="nav-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+        <ul class="navbar-nav">
+            <!-- Enlace a la página principal -->
+            <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
+            <!-- Enlace a "Quiénes somos" -->
+            <li class="nav-item"><a class="nav-link" href="{% url 'index' %}#quienes-somos">Quiénes somos</a></li>
+            <!-- Enlace a Categorías -->
+            <li class="nav-item"><a class="nav-link" href="{% url 'listar_categorias' %}">Hacer Pedido</a></li>
+            <!-- Enlace al carrito con contador -->
+            <a href="/carrito/" class="carrito-link">Carrito (<span id="carrito-cantidad">{{ cantidad_productos_carrito }}</span>)</a>
+            {% if request.user.is_authenticated %}
+            <!-- Enlace al perfil del usuario -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'mi_perfil' %}">Hola, {{ request.user.username }}</a>
+            </li>
+            <!-- Enlace para cerrar sesión -->
+            <li class="nav-item"><a class="nav-link" href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a></li>
+            {% else %}
+            <!-- Enlace para iniciar sesión -->
+            <li class="nav-item"><a class="nav-link" href="{% url 'iniciar_sesion' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<script>
+    function actualizarCarritoCantidad() {
+        fetch('/carrito/cantidad/')
+            .then(response => response.json())
+            .then(data => {
+                const carritoSpan = document.getElementById('carrito-cantidad');
+                carritoSpan.textContent = data.cantidad_productos;
+            })
+            .catch(error => console.error('Error al actualizar el carrito:', error));
+    }
+
+    // Llama a esta función después de agregar/eliminar productos.
+    document.addEventListener('DOMContentLoaded', actualizarCarritoCantidad);
+</script>
+

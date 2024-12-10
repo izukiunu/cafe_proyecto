@@ -1,0 +1,125 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+main {
+    padding: 2rem;
+}
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 2rem;
+}
+
+/* Header styles */
+h1 {
+    font-size: 2rem;
+    color: #444;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #666;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+/* Text styles */
+p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+p strong {
+    color: #333;
+}
+
+/* Alert styles */
+.alert {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    animation: fadeOut 10s forwards;
+    position: relative;
+}
+
+.alert-icon {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.alert-message {
+    flex-grow: 1;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* Button styles inside alert */
+.alert button {
+    background-color: transparent;
+    color: #007bff;
+    border: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 1rem;
+    text-decoration: underline;
+}
+
+.alert button:hover {
+    color: #0056b3;
+}
+
+/* Fade-out animation */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    h1, h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    .alert-message {
+        font-size: 0.85rem;
+    }
+}
